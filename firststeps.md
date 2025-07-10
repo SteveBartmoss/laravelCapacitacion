@@ -233,3 +233,40 @@ php artisan migrate
 
 Esto ejecuta las migraciones que laravel crea por defecto y si creamos alguna otra migracion tambien ejecutara estas migraciones.
 
+## Artisan
+
+Laravel dispone de una herramienta para linea de comandos (CLI) llamada artisan que permite ejecutar una serie de comandos prestablecidos y podemos extender esots comandos creando comandos propios.
+
+### Comandos para generr archivos
+
+- Crear migraciones
+
+- Crear seeds para datos de prueba
+
+- Crear controladore y otros tipos de archivos
+
+### Comandos para manejar procesos
+
+- Levantar un servidor de desarrollo
+
+- Ejecutar o devolver migraciones
+
+- Limpiar cache
+
+- Manejar la base de datos
+
+- Ejecutar las migraciones y seeds
+
+### Comandos para obtener informacion del proyecto
+
+- Listado de comandos
+
+- Listado de las rutas de proyecto
+
+### Comandos mas empleados 
+
+- `php artisan make:controller`: Para crear controladores.
+- `php artisan make:migration`: Para generar un archivo de migracion.
+- `php artisan migrate`: Para ejecutar las migraciones y la relacion con el rollback de las migraciones.
+- `php artisan routes`: Para ver las rutas de la aplicacion
+
