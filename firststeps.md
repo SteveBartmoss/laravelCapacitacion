@@ -198,3 +198,14 @@ navegar a la ruta que queremos sin importar que ek path de la ruta cambie
 </body>
 </html>
 ```
+
+
+## Modelo vista controlador
+
+Laravel usa el patron de Modelo, Vista, Controlador (MVC); esto mantiene cada capa como partes separadas, pero funciona en conjunto como un todo:
+
+- Los modelos admnistran los datos de la aplicacion y ayudan a hacer cumplir las reglas comerciales especiales que la aplicacion pueda necesitar.
+
+- las vistas son archivos simples, con poca o ninguna logica, que muestran la informacion al usuario; estan compuestas de HTML para la estatica y de PHP para la parte dinamica; aparte de CSS y Javascript.
+
+- Los controladores actuan como un codigo adhesivo, ordenando datos entre la vista( o el usario que los esta viendo) y el almacenamiento de datos, es decir, el modelo; este componente es done generalmente pasamos mas tiempo (junto con la vista) ya que, tenemos que organizar todo lo que vamos a ver en la vista, aplicar validaciones y demas reglas segun la logica que programemos en nuestra aplicacion.
