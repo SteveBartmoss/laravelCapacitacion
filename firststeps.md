@@ -92,3 +92,18 @@ La carpeta Http contiene sus controladores, middleware y solicitudes de formular
 **/Models**
 
 La carpeta de models contiene todas las clases de modelos de Eloquent, Cada tabla de la base de datos tiene un "Modelo" correspondiente que se utiliza para interactuar con esa tabla. Los modelos le permiten consultar datos en sus tablas, asi como insertar, actualizar y eliminar registros en tabla.
+
+
+## Router del front del proyecto
+
+Al igual que en otros framework de web como vue o react, laravel incorpora un router para mostrar las diferentes vistas de la aplicacion, esto se realiza en el archivo **web.php** ya que es aqui donde las rutas se definen para las vistas de la aplicacion, en este caso el archivo tiene este tipo de estructura
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+```
