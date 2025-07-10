@@ -209,3 +209,27 @@ Laravel usa el patron de Modelo, Vista, Controlador (MVC); esto mantiene cada ca
 - las vistas son archivos simples, con poca o ninguna logica, que muestran la informacion al usuario; estan compuestas de HTML para la estatica y de PHP para la parte dinamica; aparte de CSS y Javascript.
 
 - Los controladores actuan como un codigo adhesivo, ordenando datos entre la vista( o el usario que los esta viendo) y el almacenamiento de datos, es decir, el modelo; este componente es done generalmente pasamos mas tiempo (junto con la vista) ya que, tenemos que organizar todo lo que vamos a ver en la vista, aplicar validaciones y demas reglas segun la logica que programemos en nuestra aplicacion.
+
+
+## Configuracion de la base de datos
+
+Para realizar la conection con la base de datos desde el proyecto de laravel debemos configurar el archivo `.env` las siguientes variables para poder realizar la coneccion a la base de datos: 
+
+```php
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=curso
+DB_USERNAME=root
+DB_PASSWORD='k30zQdD9'
+```
+
+Cuando tenemos esta configuracion puede que aun no este lista la conexion del proyecto ya que debemos ejecutar las migraciones para poder obtener la conexion con el sistema que ya esta definada por laravel.
+
+
+```bash
+php artisan migrate
+```
+
+Esto ejecuta las migraciones que laravel crea por defecto y si creamos alguna otra migracion tambien ejecutara estas migraciones.
+
