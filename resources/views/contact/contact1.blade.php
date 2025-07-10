@@ -7,5 +7,19 @@
 </head>
 <body>
     <h1>Contact 1</h1>
+    <p>{{$name}}</p>
+
+    @if($name != "Steve")
+        <p>Tu nombre no es Steve</p>
+    @else
+        <p>Tu nombre es Steve</p>
+    @endif
+
+    <ul>
+        @foreach($letters as $item)
+            <li>{{$item}}</li>
+        @endforeach
+    </ul>
+    
 </body>
 </html>
