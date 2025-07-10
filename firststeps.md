@@ -270,3 +270,18 @@ Laravel dispone de una herramienta para linea de comandos (CLI) llamada artisan 
 - `php artisan migrate`: Para ejecutar las migraciones y la relacion con el rollback de las migraciones.
 - `php artisan routes`: Para ver las rutas de la aplicacion
 
+## Redirecciones
+
+Cuando estamos en una ruta ya dedinidam podemos realizar una redireccion hacia otra (no me queda claro la utilidad de esto, pero es bueno saber que eso funciona) la redireccion la podemos realizar de la siguiente manera
+
+
+```php
+Route::get('/contact1', function(){
+
+    return redirect()->route('contact2');
+    return to_route('contact2');
+    
+})->name('contact1');
+```
+
+En el ejemplo se muestra un doble return ya que podemos realizar al redireccion de las dos formas ya que laravel permite cualquiere de las dos.
