@@ -361,3 +361,40 @@ Cuando queremos usar el layout en una de las views de laravel debemos usar la di
 <p>Silverhand xd</p>
 @endsection
 ```
+
+## Controladores 
+
+Para manejar las rutas se pueden usar controladores que pueden resolver una misma ruta pero desde la clase del controlador que elegimos, para crear un controlador se puede usar el siguiente comando
+
+```bash
+php artisan make:controller PrimerControlador
+```
+
+Con esto se crea archivo que extendera la clase controlador y en el cual agregaremos la funcion que resulve la vista como se puede ver a continuacion
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PrimerControlador extends Controller
+{
+    function index(){
+        return view('post/morgan');
+    }
+}
+```
+
+Como se puede ver la funcion index, regresa el view para el post sobre morgan, asi que con esto ya podemos usar el controlador el archivo de rutas para no tener que resolver la ruta dorectamente en el controlador
+
+```php
+<?php
+
+use App\Http\Controllers\PrimerControlador;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/morgan',[PrimerControlador::class, 'index']);
+
+```
