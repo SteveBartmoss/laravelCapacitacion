@@ -285,3 +285,35 @@ Route::get('/contact1', function(){
 ```
 
 En el ejemplo se muestra un doble return ya que podemos realizar al redireccion de las dos formas ya que laravel permite cualquiere de las dos.
+
+
+## Directivas en Laravel para blade 
+
+Las directivas proporcionan atajos convenientes para estructuras de control en PHP que son comounes, como pueden ser condicionales o bucles.
+
+### Directiva if
+
+Una directiva if en laravel tiene el siguiente aspecto
+
+```php
+@if($name !== "Andres Cruz"){
+    Es true
+}
+@else{
+    No es true
+}
+@endif
+```
+
+### Directiva foreach
+
+Una directiva foreach tiene el siguiente aspceto
+
+```php
+<ul>
+    @foreach($letters as $item)
+        <li>{{$item}}</li>
+    @endforeach
+</ul>
+@endif
+```
