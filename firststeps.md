@@ -317,3 +317,47 @@ Una directiva foreach tiene el siguiente aspceto
 </ul>
 @endif
 ```
+
+## Layout 
+
+Cuando tenemos una estructura que queremos reutilizar una estructura que ya tenemos definia y que es necesaria tenerla en diferentes sitios, podemos usar un layout para la creacion una plantilla que podemos reutilizar multiples veces para evitar repetir todo el tiempo codio, un layout tiene la siguiente forma
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raichu</title>
+</head>
+<body>
+    <header>
+        La besto mamu raichu
+    </header>
+
+    @yield('content')
+
+    <section>
+        @yield('morecontent')
+    </section>
+</body>
+</html>
+```
+
+Como podemos ver un layout contiene la estructura basica de hmlt lo cual no permite reutlizar esto de una mejor manera, ya que no tenemos que estar repitiendo el codigo una y otra vez todo el tiempo, pero tiene algo importante y son las partes con la directiva `@yield('content')` y `@yield('morecontent')` ya que esto le indica a laravel que en esa parte ira contenido que se sustituye. 
+
+Cuando queremos usar el layout en una de las views de laravel debemos usar la directiva `@extends('layouts/main')` con el nombre del layout que queremos usar en la vistya, a conitnua se muesta como quedaria el uso del layout incluido como sustituir el contenido en la section
+
+```php
+@extends('layouts/main')
+
+@section('content')
+<h1>Never fade away</h1>
+<p>We lost everything </p>
+@endsection
+
+@section('morecontent')
+<h1>Jonhy Silverhand</h1>
+<p>Silverhand xd</p>
+@endsection
+```
