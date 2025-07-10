@@ -107,3 +107,94 @@ Route::get('/', function () {
     return view('welcome');
 });
 ```
+
+### Rutas
+
+Las rutas son un esquema flexible que tenemos para vincular una URI a un proceso funcional: y este proveso funcional puede ser:
+- Un callback, que es una funcion local definida en las mimas rutas.
+
+- Un controlador, que es una clase aparte.
+
+- Un componente, que es como un controlador, pero mas flexible.
+
+Si revisamos en la carpeta de routes; veremos que existen 4 archivos:
+
+- api: Para definir rutas de nuestras Apis Rest
+
+- channel: Para la comunicacion fullduplex con los canales.
+
+- console: Para crear comandos con artisan.
+
+- web: Las rutas para la aplicacion web
+
+
+Las rutas pueden ser de los siguientes tipos: 
+
+- POST crear un recurso con la funcion post()
+- GET leer un recurso o coleccion con la funcion
+- PUT actualizar un recurso con la funcion
+- PATCH actualizar un recurso con la funcion
+- DELETE eliminar un reurso con la funcion
+
+### Paso de parametros a una ruta
+
+Como en otros frameworks, se pueden mandar parametros por la ruta, para poder mostrar esa informacion en la vista, a cotinuacion de muestra la forma de pasar data a una rota
+
+```php
+Route::get('/crud', function(){
+    $data = ['name'=> 'Raichu', 'age' => 22];
+    return view('crud/index',$data);
+});
+```
+
+La forma de poder usar estas variables en nuestra vista es la siguiente: 
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Crud XD</h1>
+
+    {{ $name }}
+    {{ $age }}
+    
+</body>
+</html>
+```
+
+Se pueden los dobles {{}} como en otros frameworks para poder mostar la informacion que se manda a la vista.
+
+### Nombre de las rutas
+
+Cuando queremos navegar entre diferentes partes de la aplicacion, podemos usar las etiquetas <a>, pero uno de los problemas que podriamos tener es que si cambiamos la ruta todas las etiquetas que tenian la ruta anterior se veran afectas, pero una forma de evitar es usando el name que le asignamos a una ruta.
+
+```php
+Route::get('/crud', function(){
+    $data = ['name'=> 'Raichu', 'age' => 22];
+    return view('crud/index',$data);
+})->name('crud');
+```
+
+De esta forma podemos usar la funcion `route()` en la etiqueta <a> para poder 
+navegar a la ruta que queremos sin importar que ek path de la ruta cambie
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>La guia del internet por steve</h1>
+    <h4>No le preguntes a la documentacion, preguntame a mi</h4>
+    <a href="{{ route('crud') }}">crud</a>
+</body>
+</html>
+```
