@@ -18,9 +18,10 @@ Route::get('/crud', function(){
 
 Route::get('/contact1', function(){
 
-    return redirect()->route('contact2');
-    return to_route('contact2');
-    
+    //return redirect()->route('contact2');
+    //return to_route('contact2');
+    return view('contact/contact1',['name'=>'Steve', 'letters' => ['Raichu', 'Alanita', 'Nanchy'] ]);
+
 })->name('contact1');
 
 Route::get('/contact2', function(){
