@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrimerControlador;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,3 +32,6 @@ Route::get('/contact2', function(){
 Route::get('/raichu', function(){
     return view('post/raichu');
 });
+
+Route::get('/morgan',[PrimerControlador::class, 'index']);
+ 
