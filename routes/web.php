@@ -27,3 +27,7 @@ Route::get('/contact1', function(){
 Route::get('/contact2', function(){
     return view('contact/contact2');
 })->name('contact2');
+
+Route::get('/raichu', function(){
+    return view('post/raichu');
+});
