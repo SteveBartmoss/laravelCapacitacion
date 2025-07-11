@@ -147,3 +147,104 @@ $post->delete();
 ```
 
 De esta forma el registro que previamente buscamos se puede eliminar el registro o actualizarlo
+
+## Tipos devueltos en los metodos de los controladores
+
+- **Response**: Devolver una respuesta como por ejemplo una vista o un JSON
+- **RedirectResponse**: Devolver una redireccion, estos tipos de retornos se emplean en funciones las cuales no es necesario que regrese una vista (como en el caso de del metodo de index, que debe de devolver un listado) si no, operaciones como la de crear, actualizar y eliminar.
+- **View**: Devuelve una vista.
+
+Una respuesta de tipo json se realiza como se muestra en el siguiente ejemplo
+
+```php
+return response()->json([
+    'name' => 'Abigail',
+    'state' => 'CA',
+]);
+```
+
+## Relaciones foraneas
+
+Una relacion forenae es una resstriccion que vincula una columna de una tabala a una columna primaria de otra tabla. Sirve para garantizar **integridad referencial, es decir, asegurar que los datos relacionados existen y tienen sentido.
+
+### Uno a uno
+
+Un solo registro de la tabla tiene relacion con solo otro registro
+
+```php
+public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+```
+
+### Uno a muchos 
+
+Un registro puede tener varios registros relacionados.
+
+```php
+public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+public function post()
+{
+    return $this->belongsTo(Post::class);
+}
+```
+
+### Muchos a muchos
+
+Varios registros pueden pertenecer a varios registros
+
+```php
+public function roles()
+{
+    return $this->belongsToMany(Role::class);
+}
+
+public function users()
+{
+    return $this->belongsToMany(User::class);
+}
+```
+
+### Uno a muchos 
+
+Es la inversa de hasMany, muchos registros estan relacionados a uno solo
+
+```php
+public function post()
+{
+    return $this->belongsTo(Post::class);
+}
+```
+
+### Has many through 
+
+Una relacion inderecta a traves de un modelo intermedio
+
+```php
+public function post()
+{
+    return $this->hasManyThrough(Post::class, User::class);
+}
+```
+
+### Polimorficas 
+
+Un modelo puede pertener a mas de un modelo en una sola relacion, por ejemplo 
+un comentario puede petenecer a un post o un video.
+
+```php
+public function commentable()
+{
+    return $this->morphTo();
+}
+```
