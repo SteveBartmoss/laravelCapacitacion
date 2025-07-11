@@ -9,4 +9,8 @@ class PrimerControlador extends Controller
     function index(){
         return view('post/morgan');
     }
+
+    public function other($post){
+        echo $post;
+    }
 }
