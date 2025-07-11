@@ -62,3 +62,62 @@ $table->foreing('cat_id')
 ```
 
 Con el anterior ejemplo estamos agregando una llave foranea que no sigue las convenciones tipicas de laravel, ya que no siempre sera posible seguir la convencion o simplemente no te interesa seguir la convencion por otros motivos.
+
+## Controladores
+
+Se usa el siguiente comando para crear el controlador
+
+```bash
+php artisan make:controller 
+```
+
+El comando anterior crea solo el controlador pero podemos pasar los siguientes parametros para que nos cree el modelo y ademas sea un controlador de tipo resource
+
+```bash
+php artisan make:controller Dashboard\Post -r -m
+```
+
+De esta forma no solo se crea el controlador si no que tambien genera un modelo y lo asocia con el controlador
+
+## Cear un registro en base de datos
+
+Cuando queremos crear en la base de datos un registro, podemos hacer utilizando el modelo que tenemos asignado a la tabla en la base de datos como se muestr a continuacion
+
+```php
+Post::create([
+    'title' => 'test title',
+    'slug' => 'test slug',
+    'content' => 'test content',
+    'category_id' => 1,
+    'description' => 'test description',
+    'posted' => 'not',
+    'image' => 'test image',
+]);
+```
+
+Pero si queremos usar el modelo tambien dememos colocar en el modelo los campos que pueden ser llenados, ya que por defecto laravel no permite llenar ningun campo si no le indicamos lo contrario en modelo como se muestra a continuacion
+
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'category_id',
+        'description',
+        'posted',
+        'image',
+    ];
+
+}
+```
+
+Con la propiedad `protected $fillable` le indicamos a laravel que campos podemos actualizar mediante el uso del modelo
