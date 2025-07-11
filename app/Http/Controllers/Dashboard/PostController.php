@@ -10,8 +10,8 @@ class PostController extends Controller
 {
     public function index()
     {
-
-        Post::createOrUpdate([
+        /*
+        $post = Post::updateOrCreate([
             'title' => 'test title',
         ],
         [
@@ -22,7 +22,18 @@ class PostController extends Controller
             'posted' => 'not',
             'image' => 'test image',
         ]);
+        */
 
+        //dd($post);
+        
+        $post = Post::where('title','test title')->get()->first(); 
+
+        $post->update(
+            [
+                'slug' => 'update slug',
+            ]
+        );
+        
         return 'Index';
     }
 
