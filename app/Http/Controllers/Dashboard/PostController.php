@@ -10,7 +10,18 @@ class PostController extends Controller
 {
     public function index()
     {
-        /*
+        
+        $post = Post::where('title','test title')->get()->first(); 
+        dd($post);
+        
+        return 'Index';
+        
+        return response()->json([
+            'name' => 'Abigail',
+            'state' => 'CA',
+        ]);
+
+        
         $post = Post::updateOrCreate([
             'title' => 'test title',
         ],
@@ -22,7 +33,6 @@ class PostController extends Controller
             'posted' => 'not',
             'image' => 'test image',
         ]);
-        */
 
         //dd($post);
         
@@ -33,7 +43,7 @@ class PostController extends Controller
                 'slug' => 'update slug',
             ]
         );
-        
+
         return 'Index';
     }
 
