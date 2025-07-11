@@ -21,7 +21,8 @@ Route::get('/contact1', function(){
 
     //return redirect()->route('contact2');
     //return to_route('contact2');
-    return view('contact/contact1',['name'=>'Steve', 'letters' => ['Raichu', 'Alanita', 'Nanchy'] ]);
+    $post = ['name'=>'Steve', 'letters' => ['Raichu', 'Alanita', 'Nanchy'] ];
+    return view('contact/contact1',compact('post'));
 
 })->name('contact1');
 
