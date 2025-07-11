@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PrimerControlador;
+use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,3 +40,4 @@ Route::get('/morgan',[PrimerControlador::class, 'index']);
 //Route::resource('post', PrimerControlador::class);
 Route::get('otro/{post}', [PrimerControlador::class, 'other']);
 
+Route::resource('post', PostController::class);
