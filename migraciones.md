@@ -42,3 +42,23 @@ Algunas de las operaciones que se aplican al crear las columns son las siguiente
 
 - **onDelete()** indica el comportamiento que van a tenewr lkos registros al ser eliminados en una relacion foreanea.
 
+Cuando tenemos definada nuestra migracion o migraciones, podemos usar ek siguiente comando para correr todas migraciones y crear las tablas en la base de datos con el siguiente comando
+
+```bash
+php artisan migrate
+```
+
+## Llave foranea
+
+Por defecto laravel espera que los campos de relacion sigan la siguiente nomenclatura, `$table->foreingId('category_id')->constrained()->onDelete('cascade');` y esto es una buena practica, pero puede que por diferentes decisiones no puedas seguirla, en ese caso daria un poco de error pues no estamos siguiendo la nomenclatura, aun asi podemos usar otra alternativa para nombrar la llave foranea.
+
+```php
+
+$table->unsignedBigInteger('cat_id');
+$table->foreing('cat_id')
+      ->references('uuid')
+      ->on('catalogos')
+      ->onDelete('cascade');
+```
+
+Con el anterior ejemplo estamos agregando una llave foranea que no sigue las convenciones tipicas de laravel, ya que no siempre sera posible seguir la convencion o simplemente no te interesa seguir la convencion por otros motivos.
