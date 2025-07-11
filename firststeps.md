@@ -398,3 +398,58 @@ use Illuminate\Support\Facades\Route;
 Route::get('/morgan',[PrimerControlador::class, 'index']);
 
 ```
+
+## Rutas de tipo resource
+
+Las rutas del tipo resource son un tipo diferente de rutas ya que estas defien multiples rutas en una sola, al momento de declarar la ruta como resource de forma simultanea se declaran las Siguiente rutas
+
+- Listar recursos
+- Mostrar formulrio de creacion
+- Guardar nuegos registros 
+- Mostrar un recurso individual
+- Mostrar formulario de edicion
+- Actualizar un recurso 
+- Eliminar un recurso
+
+Para que lo anerior suceda tenemos que declarar la ruta de la siguiete manera 
+
+```php
+<?php
+
+use App\Http\Controllers\PrimerControlador;
+use Illuminate\Support\Facades\Route;
+
+Route::resource('post', PrimerControlador::class);
+
+```
+
+Pero ademas de tener esta ruta declarada debemos cumplir con las siguientes condiciones en nuestro contolador 
+
+```php
+public function index()
+public function create()
+public funcition store()
+public function store(Request $request)
+public function show($id)
+public function edit($id)
+public function update(Request $request)
+public function destroy($id)
+```
+
+Esto es porque las rutas esperan esas misma funciones en el cotrolador ya que definimos en la ruta, que todas estas funciones estaran disponibles
+
+## Paso de parametros a una ruta
+
+Desde la ruta de la aplicacion podemos mandar parametros para la funcion que resuelve esa ruta podemos hacer de la siguiente manera 
+
+```php
+Route::get('otro/{post}', [PrimerControlador::class, 'other']);
+```
+
+En el controlador podemos usar el valor que pasamos de la siguiente manera
+
+```php
+public function other($post){
+    echo $post;
+}
+```
