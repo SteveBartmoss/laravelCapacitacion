@@ -453,3 +453,28 @@ public function other($post){
     echo $post;
 }
 ```
+
+## Compact 
+
+Cuando pasamos argumentos a una ruta en laravel la estructrua comun es algo como esto:
+
+```php
+Route::get('/contact1', function(){
+
+    return view('contact/contact1',['name'=>'Steve', 'letters' => ['Raichu', 'Alanita', 'Nanchy'] ]);
+
+})->name('contact1');
+```
+
+Se envian como si fuera un arreglo de parametros, pero cuando tenemos multiples parametros esto puede complicarse, asi que podemos usar compact para reducir la cantidad de elementos visuales que se pasan a la vista
+
+```php
+Route::get('/contact1', function(){
+    $name = 'Steve';
+    $letters = ['Raichu', 'Alanita', 'Nanchy'];
+    return view('contact/contact1',compact('name','letters'));
+
+})->name('contact1');
+```
+
+De esta forma solo mandamos la informacion para la vista, sin tener que mandar como tal el arreglo asociativo, simplemente mandamos los nombres de las variables como un string
