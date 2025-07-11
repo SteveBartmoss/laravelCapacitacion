@@ -7,16 +7,16 @@
 </head>
 <body>
     <h1>Contact 1</h1>
-    <p>{{$name}}</p>
+    <p>{{$post['name']}}</p>
 
-    @if($name != "Steve")
+    @if($post['name'] != "Steve")
         <p>Tu nombre no es Steve</p>
     @else
         <p>Tu nombre es Steve</p>
     @endif
 
     <ul>
-        @foreach($letters as $item)
+        @foreach($post['letters'] as $item)
             <li>{{$item}}</li>
         @endforeach
     </ul>
