@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $tabla->string('title', 500);
+            $table->string('title', 500);
             $table->string('slug',500);
             $table->text('description')->nullable();
             $table->text('content')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('posted', ['yes','not'])->default('not');
             $table->timestamps();
 
-            $table->foreingId('category_id')->constrained()
+            $table->foreignId('category_id')->constrained()
                 ->onDelete('cascade');
         });
     }
