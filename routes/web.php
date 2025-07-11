@@ -34,4 +34,7 @@ Route::get('/raichu', function(){
 });
 
 Route::get('/morgan',[PrimerControlador::class, 'index']);
- 
+
+//Route::resource('post', PrimerControlador::class);
+Route::get('otro/{post}', [PrimerControlador::class, 'other']);
+
