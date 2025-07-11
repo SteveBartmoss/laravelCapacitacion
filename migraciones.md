@@ -120,4 +120,30 @@ class Post extends Model
 }
 ```
 
-Con la propiedad `protected $fillable` le indicamos a laravel que campos podemos actualizar mediante el uso del modelo
+Con la propiedad `protected $fillable` le indicamos a laravel que campos podemos actualizar mediante el uso del modelo  
+
+## Actualizar
+
+Para actualizar un registro de la base de datos podemos usar el mismo modelos solo que perimo debemos buscar el registro a modidificar con el siguiente metodo
+
+```php
+$post = Post::where('title','test title')->get()->first();
+```
+
+De esta forma obtenemos el primer registro que encontramos y despues podemos modificar ese mismo registro con el siguiente metodo
+
+```php
+$post->update(
+    [
+        'slug' => 'update slug',
+    ]
+);
+```
+
+Con lo anterior podemos actualizar el registro y si es necesario podemos eliminar el registro de la siguiente manera
+
+```php
+$post->delete();
+```
+
+De esta forma el registro que previamente buscamos se puede eliminar el registro o actualizarlo
