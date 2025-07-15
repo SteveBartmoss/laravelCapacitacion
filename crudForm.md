@@ -237,3 +237,30 @@ Cuando registramo informacion en base de datos, debemos asegurarnos que algunos 
 ```
 
 En la anterior configuracion estamos definiendo que este valor debe ser unico para la tabla post, de esta maner laravel internamente maneja la exception cuando encuenta el valor repetido
+
+## Fragmento de vista
+
+Podemos definir fragmentos para reutilizar codigo en las vistas, por ejemplo se puede reutilizar el fragmento de codigo que usamos para mostrar los errores en el formulario de la siguiente manera
+
+```php
+@if($errors->any())
+    @foreach ($errors->all() as $e){
+        <div>
+            {{ $e }}
+        </div>
+    }
+    @endforeach
+@endif
+```
+
+De esta forma tenemos la ruta `dashboard/fragment/errors-form.blade` en donde creamos el archivo con el codigo anterior, ahora podemos insertarlo en donde lo necesitamos facilcilmente como se muestra a continuacion
+
+```php
+@section('content')
+
+    @include('dashboard.fragment.errors-form')
+
+@endsection
+```
+
+De esta forma estamos insertando el fragmento en el archivo `create.blade` para poder reutilizar codigo en alguna otra parte del proyecto
