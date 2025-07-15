@@ -264,3 +264,29 @@ De esta forma tenemos la ruta `dashboard/fragment/errors-form.blade` en donde cr
 ```
 
 De esta forma estamos insertando el fragmento en el archivo `create.blade` para poder reutilizar codigo en alguna otra parte del proyecto
+
+## Paginate
+
+Cuando estamos listando recursos, es comun que no queremos mostrar todos los recuros en la pagina principal, ya que es dificil para los usuario ver la informacion asi que una buena opcion es usar `paginate` para que nos devuelva la informacion paginada y no tengamo que mostrar todo de una sola vez, como se muestra acontinuacion se implementa la funcion para la paginacion de la informacion desde el modelo de base de datos
+
+```php
+$postList = Post::paginate(2);
+```
+
+Con lo anterior ya tenemos la paginacion en los elemento que nos trae la base de datos pero aun debemos manejar la pagina del lado de la vista y eso es simple si usamos la siguiente funcion en el archivo `list.blade`
+
+```php
+@section('content')
+    <h1>Lista de post creados</h1>
+
+    <table>
+        ...
+    </table>
+    
+
+    {{$postList->links() }}
+    
+@endsection
+```
+
+De esta forma ya se resuelve una funcion que agrega una paginacion para mostrar los elementos respondidos desde el backend
