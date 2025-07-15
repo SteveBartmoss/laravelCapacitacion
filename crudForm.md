@@ -124,4 +124,88 @@ public function store(Request $request)
 De esta forma simplemente pasamos toda la informacion y el modelo hace la relacion interna para cada valor, **Importante** esto lo hace en automatico porque laravel asume que el nombre del modelo, coincide con el nombre en el arreglo del request, pero si esto no es asi entonces la relacion no se hace en automatico y tenemos que indicar los campos como se muestra en la primera opcion
 
 
+## Validacion de datos
+
+Las validaciones de los datos que recibe una ruta tiene la siguiente forma base
+
+```php
+"title" => "required|min:5|max:500",
+```
+
+Con lo anterior podemos definir las validaciones dentro del controlador de la siguiente manera 
+
+
+```php
+public function store(Request $request)
+    {
+
+        $request->validate([
+            'tile' => 'required|min:5|max:500',
+            'slug' => 'required|min:5|max:500',
+            'content' => 'required|min:7',
+            'category_id' => 'required|integer',
+            'description' => 'required|min:7',
+            'posted' => 'required',
+        ]);
+
+    }
+```
+
+Con esta forma definimos directamente en el controlador del post las reglas de cada valor que ingrega y en caso de que este incorrecto algun dato, se redirecciona al mismo formulario de creacion
+
+### Validacion con formRequest
+
+Otra forma de validar los valores que mandamos a una ruta es con un form request, para esto creamos el request con el siguiente comando
+
+```bash
+php artisan make:request nombreDelRequest
+```
+
+Dentro del archivo que se segenera debemos hacer la siguiente configuracion
+
+```php
+class StoreRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'tile' => 'required|min:5|max:500',
+            'slug' => 'required|min:5|max:500',
+            'content' => 'required|min:7',
+            'category_id' => 'required|integer',
+            'description' => 'required|min:7',
+            'posted' => 'required',
+        ];
+    }
+}
+```
+
+En esta configuracion se puede resaltar que la funcion `authorize()` esta destinada para casos en los que un usuario no esta autorizado por el rol que tiene o aguna restriccion de validacion, en este caso no necesitamos eso por eso se cambia directamente a true
+
+Por otra parte en la funcion `rules()` Se definen las mismas reglas que ya teniamos en la validacion previa, solo que de esta forma tenemos definidas las reglas en un archivo general y evitamos repetir el codigo entre diferentes secciones del codigo
+
+### Insertar el request en el controlador
+
+Cuando ya tenemos configurado  el request, simplemente tenemos que insertar el mismo request en la clase del controlador
+
+```php
+use App\Http\Requests\Post\StoreRequest;
+
+class PostController extends Controller
+{
+
+    public function store(StoreRequest $request)
+    {
+        Post::create($request->all());
+        return redirect()->route('post.create');
+    }
+}
+```
+
+Con la anterior ya tenemos cubierta la excepcion y gracias a esto el controlador queda mas simple y no tan lleno de informacion
 
