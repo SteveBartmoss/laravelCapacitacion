@@ -24,22 +24,22 @@ De esta forma debemos crear una vista necesaria para mostrar el formulario en la
         <label for="">Title</label>
         <input type="text" name="title">
         <label for="">Slug</label>
+        <input type="text" name="slug">
+        <label for="">Content</label>
+        <input type="text" name="content">
         <label for="">Category</label>
         <select name="category">
             @foreach ($categories as $title => $id)
                 <option value="{{$id}}">{{$title}}</option>
             @endforeach
         </select>
-        <input type="text" name="slug">
         <label for="">Description</label>
+        <input type="text" name="description">
         <label for="">Posted</label>
         <select name="posted">
-            <option value="yes">Yes</option>
             <option value="not">Not</option>
+            <option value="yes">Yes</option>
         </select>
-        <input type="text" name="description">
-        <label for="">Content</label>
-        <input type="text" name="content">
         <label for="">Image</label>
         <input type="text" name="image">
         <button type="submit">Send</button>
@@ -55,4 +55,73 @@ De esta forma debemos crear una vista necesaria para mostrar el formulario en la
 De esta forma utilizamos un layout para crear el formulario que corresponde ala creacion de un post
 
 ## Controlador create
+
+Como uno de los datos que mostramos en el formulario proviene de la base de datos, lo recuperamos desde la base de datos con la siguiente linea de codigo
+
+```php
+$categories = Category::pluck('id','title');
+```
+
+Pluck es un metodo de coleccion y consulta que se utiliza para extraer la lista de valores de una columna especifica de la base de datos o de una coleccion.
+
+De esta forma creamos un arreglo de clave valor, que es muy util para asiganarla a las listas desplegables, en formularios como es el caso del formulario anterior con la lista de categorias
+
+## Conectar el formulario para la creacion
+
+Con el formulario creado podemos conectar lo a una funcion de creacion para que podamos guardar la informacion en la base de datos, esto lo realizamos de la siguiente manera
+
+```php
+<form action="{{ route('post.store')}}" method="post">
+</form>
+```
+
+Con lo anterior estamos pasando la ruta del post.store, en caso de no recordar la ruta o no saber cual es la ruta que se definio, podemos usar el comando 
+
+
+```bash
+php artisan route:list
+```
+
+Esto nos mostrara las rutas, cuando ya tenemos configurada la ruta, nos macara un error al intertar acceder, ya que laravel tiene una capa de seguridad para que un formulario que no esta autenticado por laravel, no pueda mandar o acceder a ciertas rutas, por esta razon debemos hacer lo siguiente
+
+
+```php
+<form action="{{ route('post.store')}}" method="post">
+    @csrf
+</form>
+```
+
+Esto genera internamente un input oculto con un token que indica a laravel que esl formulario es valido, con esto deja de aparecer el error 4219. **Importante** se debe usar la directiva `@csrf` dentro del formulario para que surta efecto
+
+### Guardado en base de datos
+
+Como el formulario que creamos es personalizado, cada campo del fomulario se liga con su nombre y se envia por url a la ruta que antes configuramos, asi que para crear el post en base de datos podemos simplemente hacer lo siguiente 
+
+```php
+public function store(Request $request)
+    {
+        Post::create([
+            'title' => $request->all()['title'],
+            'slug' => $request->all()['slug'],
+            'content' => $request->all()['content'],
+            'category_id' => $request->all()['category_id'],
+            'description' => $request->all()['description'],
+            'posted' => $request->all()['posted'],
+            'image' => $request->all()['image'],
+        ]);
+    }
+```
+
+Se puede enviar los datos en espefecico para la creacion, esto ayuda cuando tenemos datos que no pertenecen al modelo y queremos pasar solo los que necesita, en este caso como el pormulario es solo para el post podemos hacer lo siguiente
+
+```php
+public function store(Request $request)
+    {
+        Post::create($request->all());
+    }
+```
+
+De esta forma simplemente pasamos toda la informacion y el modelo hace la relacion interna para cada valor, **Importante** esto lo hace en automatico porque laravel asume que el nombre del modelo, coincide con el nombre en el arreglo del request, pero si esto no es asi entonces la relacion no se hace en automatico y tenemos que indicar los campos como se muestra en la primera opcion
+
+
 
