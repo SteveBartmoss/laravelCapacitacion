@@ -2,14 +2,7 @@
 
 @section('content')
 
-    @if($errors->any())
-        @foreach ($errors->all() as $e){
-            <div>
-                {{ $e }}
-            </div>
-        }
-        @endforeach
-    @endif
+    @include('dashboard.fragment.errors-form')
 
     <h1>Formulario para los post</h1>
     <form action="{{ route('post.store')}}" method="post">
