@@ -209,3 +209,21 @@ class PostController extends Controller
 
 Con la anterior ya tenemos cubierta la excepcion y gracias a esto el controlador queda mas simple y no tan lleno de informacion
 
+## Mostrar errores de validacion
+
+Caundo se trabaja con el formRequest, podemos acceder a los errores de validacion desde la variable `$errors` que laravel maneja de forma interna, de esta forma podemos mostrar simplemente los errores de la siguiente forma
+
+```php
+@section('content')
+
+    @if($errors->any())
+        @foreach ($errors->all() as $e){
+            <div>
+                {{ $e }}
+            </div>
+        }
+        @endforeach
+    @endif
+    
+@endsection
+```
