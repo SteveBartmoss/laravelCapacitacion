@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreRequest;
 
 class PostController extends Controller
 {
@@ -59,7 +60,7 @@ class PostController extends Controller
         return view('dashboard/post/create',compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         Post::create($request->all());
