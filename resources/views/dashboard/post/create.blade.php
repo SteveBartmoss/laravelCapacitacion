@@ -30,6 +30,6 @@
 @endsection
 
 @section('morecontent')
-<h1>Logros</h1>
-<p>Ser morgan black hand</p>
+<h1>Ver la lista de posts</h1>
+<a href="{{route('post.index')}}">Lista post</a>
 @endsection
