@@ -3,14 +3,29 @@
 @section('content')
     <h1>Lista de post creados</h1>
 
-    @foreach ($postList as $key => $value)
-        <p>
-            <span>{{$value->tile}}</span>
-            <span>{{$value->slug}}</span>
-            <span>{{$value->description}}</span>
-            <span>{{$value->content}}</span>
-        </p>
-    @endforeach
+    <table>
+        <thead>
+            <tr>Title</tr>
+            <tr>Posted</tr>
+            <tr>Category</tr>
+        </thead>
+        <tbody>
+            @foreach ($postList as $key => $value)
+            <tr>
+                <td>
+                    {{$value->title}}
+                </td>
+                <td>
+                    {{$value->posted}}
+                </td>
+                <td>{{$value->category->title}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    
+
+    {{$postList->links() }}
     
 @endsection
 
