@@ -58,6 +58,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        Post::create($request->all());
+
+        /*
+        Post::create([
+            'title' => $request->all()['title'],
+            'slug' => $request->all()['slug'],
+            'content' => $request->all()['content'],
+            'category_id' => $request->all()['category_id'],
+            'description' => $request->all()['description'],
+            'posted' => $request->all()['posted'],
+            'image' => $request->all()['image'],
+        ]);
+        */
+
+        return redirect()->route('post.create');
     }
 
     public function show(string $id)
