@@ -2,7 +2,8 @@
 
 @section('content')
     <h1>Formulario para los post</h1>
-    <form action="" method="post">
+    <form action="{{ route('post.store')}}" method="post">
+        @csrf
         <label for="">Title</label>
         <input type="text" name="title">
         <label for="">Slug</label>
@@ -10,7 +11,7 @@
         <label for="">Content</label>
         <input type="text" name="content">
         <label for="">Category</label>
-        <select name="category">
+        <select name="category_id">
             @foreach ($categories as $title => $id)
                 <option value="{{$id}}">{{$title}}</option>
             @endforeach
