@@ -1,6 +1,16 @@
 @extends('layouts/main')
 
 @section('content')
+
+    @if($errors->any())
+        @foreach ($errors->all() as $e){
+            <div>
+                {{ $e }}
+            </div>
+        }
+        @endforeach
+    @endif
+
     <h1>Formulario para los post</h1>
     <form action="{{ route('post.store')}}" method="post">
         @csrf
