@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        
+        /*
         $post = Post::where('title','test title')->get()->first(); 
         dd($post);
 
@@ -44,8 +44,12 @@ class PostController extends Controller
                 'slug' => 'update slug',
             ]
         );
+        */
 
-        return 'Index';
+        $postList = Post::get();
+
+        return view('dashboard/post/list',compact('postList'));
+
     }
 
     public function create()
