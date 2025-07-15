@@ -12,7 +12,7 @@ public function create()
 }
 ```
 
-De esta forma debemo crear una vista necesaria para mostrar el formulario en la vista con lo cual quedaria de la siguiente forma
+De esta forma debemos crear una vista necesaria para mostrar el formulario en la vista con lo cual quedaria de la siguiente forma
 
 
 ```php
@@ -53,4 +53,6 @@ De esta forma debemo crear una vista necesaria para mostrar el formulario en la 
 ```
 
 De esta forma utilizamos un layout para crear el formulario que corresponde ala creacion de un post
+
+## Controlador create
 
