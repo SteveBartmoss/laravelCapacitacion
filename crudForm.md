@@ -224,6 +224,16 @@ Caundo se trabaja con el formRequest, podemos acceder a los errores de validacio
         }
         @endforeach
     @endif
-    
+
 @endsection
 ```
+
+## Validar datos unicos
+
+Cuando registramo informacion en base de datos, debemos asegurarnos que algunos cmapos sean unicos, esto es porque no queremos que un campo que se usara para buscar un solo registro este guardado mas de una vez, para evitar eso podemos usar la siguiente configuracion en el formRequest
+
+```php
+'slug' => 'required|min:5|max:500|unique:posts',
+```
+
+En la anterior configuracion estamos definiendo que este valor debe ser unico para la tabla post, de esta maner laravel internamente maneja la exception cuando encuenta el valor repetido
