@@ -47,7 +47,7 @@ class PostController extends Controller
         );
         */
 
-        $postList = Post::get();
+        $postList = Post::paginate(2);
 
         return view('dashboard/post/list',compact('postList'));
 
