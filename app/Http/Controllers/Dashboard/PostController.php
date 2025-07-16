@@ -87,11 +87,17 @@ class PostController extends Controller
 
     public function edit(string $id)
     {
+        $post = Post::find($id); 
+        $categories = Category::pluck('id','title');
 
+        return view('dashboard/post/edit',compact('post','categories'));
     }
 
     public function update(Request $request, string $id)
     {
+        $post = Post::find($id);
+        $post->update($request->all());
+        return to_route('post.index');
 
     }
 
