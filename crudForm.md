@@ -290,3 +290,84 @@ Con lo anterior ya tenemos la paginacion en los elemento que nos trae la base de
 ```
 
 De esta forma ya se resuelve una funcion que agrega una paginacion para mostrar los elementos respondidos desde el backend
+
+## Actualizacion de un post 
+
+Para actualizar la informacion que ya insertamos en la base de datos, podemos usar la vista donde mostramos todos los post que tenemos creados en base de datos, para poder mostrar en ese mismo apartado los enlaces para modificar
+
+```php
+@section('content')
+    <tbody>
+            @foreach ($postList as $key => $value)
+            <tr>
+                <td>
+                    {{ $value->id }}
+                </td>
+                <td>
+                    {{$value->title}}
+                </td>
+                <td>
+                    {{$value->posted}}
+                </td>
+                <td>
+                    {{$value->category->title}}
+                </td>
+                <td>
+                    <a href="{{route('post.edit',$value->id)}}">Editar</a>
+                    <a href="{{route('post.show',$value->id)}}">ver</a>
+                    <a href="{{route('post.destroy',$value->id)}}">Eliminar</a>
+                </td>
+            </tr>
+            @endforeach
+    </tbody>
+@endsection
+```
+
+En esta tabla que mostramos podemos agregar las etiquetas a para redirigir al usuario a la pagina de editar po ejemplo, en el controlador tenemos que regresar una vista igual que como hacemos con la vista de crear, asi que se confiugura de la siguiente manera
+
+```php
+public function edit(string $id)
+{
+    $post = Post::find($id); 
+    $categories = Category::pluck('id','title');
+
+    return view('dashboard/post/edit',compact('post','categories'));
+}
+```
+
+Como esta ruta se trata de actualizar, cuando creamos la ruta con el resource esperamos un id, porque tenemos que buscar la informacion del elemento a modificar y por eso realizamos la busqueda del post con `find` y tambien pasamos las `categories ` porque son necesarias el formulario. 
+
+La vista que creamos para la actualizacion es exactamente igual que la vista de creacion con la diferencia de que el form cambia de ruta y ademas se tiene que decorar, ademas de que los imputs ahora tienen el valor del post que mandamos
+
+```php
+<form action="{{ route('post.update', $post->id)}}" method='post'>
+        @method("PATCH")
+        @csrf
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <input type="text" name="title" value="{{$post->title}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            ...
+
+        </div>
+    </div>
+</form>
+```
+
+De esta forma tenemos configurada la vista, podria hacerse una modificacion para que el codigo funcione la misma vista para crear y edtitar, mediante el uso de condificiones para la declaracion de los decoradores y las rutas de los formularios pero en el curso simplemente copio y pego XD
+
+Cuando tenemos configurada la vista, debemos condfigurar la ruta que nos realice la modificacion del recurso en base de datos como se muestra a continuacion
+
+```php
+public function update(Request $request, string $id)
+{
+    $post = Post::find($id);
+    $post->update($request->all());
+    return to_route('post.index');
+
+}
+```
