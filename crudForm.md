@@ -337,7 +337,7 @@ public function edit(string $id)
 
 Como esta ruta se trata de actualizar, cuando creamos la ruta con el resource esperamos un id, porque tenemos que buscar la informacion del elemento a modificar y por eso realizamos la busqueda del post con `find` y tambien pasamos las `categories ` porque son necesarias el formulario. 
 
-La vista que creamos para la actualizacion es exactamente igual que la vista de creacion con la diferencia de que el form cambia de ruta y ademas se tiene que decorar, ademas de que los imputs ahora tienen el valor del post que mandamos
+La vista que creamos para la actualizacion es exactamente igual que la vista de creacion con la diferencia de que el form cambia de ruta y ademas se tiene que decorar pues por defecto los formularios de html no soportan put,pach o delete y por esa razon usamos el decorador de `@method("PATCH")` que hace posible que se mande el metodo patch, put o delete, ademas de que los imputs ahora tienen el valor del post que mandamos
 
 ```php
 <form action="{{ route('post.update', $post->id)}}" method='post'>
@@ -370,4 +370,28 @@ public function update(Request $request, string $id)
     return to_route('post.index');
 
 }
+```
+
+### Request validate para actualizar
+
+Las reglas que se configuraron para la validacion de crear no simpre se pueden reutilizar, porque en este caso el slug lo definimos como unico pero al momento de actualizar no es necesario que sea unico, por esto debemo crear un nuevo request para la actualizacion, con el comando `php artisan make:request Post/PutRequest` la estructura quedaria de la siguiente forma 
+
+```php
+public function rules(): array
+{
+    return [
+        'title' => 'required|min:5|max:500',
+        'slug' => 'required|min:3|max:500',
+        'content' => 'required|min:7',
+        'category_id' => 'required|integer',
+        'description' => 'required|min:7',
+        'posted' => 'required',
+    ];
+}
+```
+
+Con esto podemos validar los campos pero el atributo slug en teoria no debe modificarse asi que podemos usar el decorador `@readonly(true)` para hacer que el imput  no este disponible para editar el campo
+
+```php
+<input  type="text" name="slug" value="{{$post->slug}}" @readonly(true)/>
 ```
