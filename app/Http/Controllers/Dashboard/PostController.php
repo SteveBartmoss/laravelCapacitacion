@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\PutRequest;
 
 class PostController extends Controller
 {
@@ -93,7 +94,7 @@ class PostController extends Controller
         return view('dashboard/post/edit',compact('post','categories'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(PutRequest $request, string $id)
     {
         $post = Post::find($id);
         $post->update($request->all());
