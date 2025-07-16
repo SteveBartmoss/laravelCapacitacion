@@ -22,7 +22,7 @@
 
                     <div>
                         <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                        <input type="text" name="slug" value="{{$post->slug}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input  type="text" name="slug" value="{{$post->slug}}" @readonly(true) class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div>
@@ -51,7 +51,9 @@
 
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <input type="text" name="description" value="{{$post->description}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <textarea type="text" name="description" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            {{$post->description}}
+                        </textarea>
                     </div>
 
                     <div>
